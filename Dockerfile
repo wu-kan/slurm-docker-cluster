@@ -29,7 +29,7 @@ chown -R slurm:slurm /var/*/slurm*
 
 
 . $SCC_SETUP_ENV
-spack install -y --fail-fast --no-checksum slurm+hdf5+hwloc+mariadb+pmix+readline+restd target=$(arch) ^ glib@:2.74.7 ^ hdf5~mpi && spack gc -y
+spack install -y --fail-fast slurm+hdf5+hwloc+mariadb+pmix+readline+restd target=$(arch) ^ glib@:2.74.7 ^ hdf5~mpi && spack gc -y
 spack clean -ab
 
 EOF

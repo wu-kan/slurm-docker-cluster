@@ -26,21 +26,14 @@ The compose file will create the following named volumes:
 
 Build the image locally:
 
-```console
-docker build -t slurm-docker-cluster:21.08.6 .
-```
-
-Build a different version of Slurm using Docker build args and the Slurm Git
-tag:
-
-```console
-docker build --build-arg SLURM_TAG="slurm-19-05-2-1" -t slurm-docker-cluster:19.05.2 .
+```bash
+docker build -t slurm-docker-cluster .
 ```
 
 Or equivalently using `docker compose`:
 
-```console
-SLURM_TAG=slurm-19-05-2-1 IMAGE_TAG=19.05.2 docker compose build
+```bash
+docker compose build
 ```
 
 
@@ -48,8 +41,8 @@ SLURM_TAG=slurm-19-05-2-1 IMAGE_TAG=19.05.2 docker compose build
 
 Run `docker compose` to instantiate the cluster:
 
-```console
-IMAGE_TAG=19.05.2 docker compose up -d
+```bash
+docker compose up -d
 ```
 
 ## Register the Cluster with SlurmDBD
@@ -57,7 +50,7 @@ IMAGE_TAG=19.05.2 docker compose up -d
 To register the cluster to the slurmdbd daemon, run the `register_cluster.sh`
 script:
 
-```console
+```bash
 ./register_cluster.sh
 ```
 
@@ -72,13 +65,13 @@ script:
 
 Use `docker exec` to run a bash shell on the controller container:
 
-```console
+```bash
 docker exec -it slurmctld bash
 ```
 
 From the shell, execute slurm commands, for example:
 
-```console
+```bash
 [root@slurmctld /]# sinfo
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 normal*      up 5-00:00:00      2   idle c[1-2]
@@ -90,7 +83,7 @@ The `slurm_jobdir` named volume is mounted on each Slurm container as `/data`.
 Therefore, in order to see job output files while on the controller, change to
 the `/data` directory when on the **slurmctld** container and then submit a job:
 
-```console
+```bash
 [root@slurmctld /]# cd /data/
 [root@slurmctld data]# sbatch --wrap="uptime"
 Submitted batch job 2
@@ -100,7 +93,7 @@ slurm-2.out
 
 ## Stopping and Restarting the Cluster
 
-```console
+```bash
 docker compose stop
 docker compose start
 ```
@@ -109,7 +102,7 @@ docker compose start
 
 To remove all containers and volumes, run:
 
-```console
+```bash
 docker compose stop
 docker compose rm -f
 docker volume rm slurm-docker-cluster_etc_munge slurm-docker-cluster_etc_slurm slurm-docker-cluster_slurm_jobdir slurm-docker-cluster_var_lib_mysql slurm-docker-cluster_var_log_slurm
