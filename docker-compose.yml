@@ -14,11 +14,7 @@ services:
       - var_lib_mysql:/var/lib/mysql
 
   slurmdbd:
-    image: slurm-docker-cluster:${IMAGE_TAG:-21.08}
-    build:
-      context: .
-      args:
-        SLURM_TAG: ${SLURM_TAG:-slurm-21-08-6-1}
+    image: wukan0621/slurm-docker-cluster
     command: ["slurmdbd"]
     container_name: slurmdbd
     hostname: slurmdbd
@@ -32,7 +28,7 @@ services:
       - mysql
 
   slurmctld:
-    image: slurm-docker-cluster:${IMAGE_TAG:-21.08}
+    image: wukan0621/slurm-docker-cluster
     command: ["slurmctld"]
     container_name: slurmctld
     hostname: slurmctld
@@ -47,13 +43,12 @@ services:
       - "slurmdbd"
 
   c1:
-    image: slurm-docker-cluster:${IMAGE_TAG:-21.08}
+    image: wukan0621/slurm-docker-cluster
     command: ["slurmd"]
     hostname: c1
     container_name: c1
     volumes:
       - etc_munge:/etc/munge
-      - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
     expose:
@@ -62,13 +57,12 @@ services:
       - "slurmctld"
 
   c2:
-    image: slurm-docker-cluster:${IMAGE_TAG:-21.08}
+    image: wukan0621/slurm-docker-cluster
     command: ["slurmd"]
     hostname: c2
     container_name: c2
     volumes:
       - etc_munge:/etc/munge
-      - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
     expose:

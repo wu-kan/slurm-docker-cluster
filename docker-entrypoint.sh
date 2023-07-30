@@ -64,7 +64,7 @@ if [ "$1" = "slurmd" ]; then
     spack load slurm
 
     echo "---> Starting the Slurm Node Daemon (slurmd) ..."
-    exec $(spack location -i slurm)/sbin/slurmd -Dvvv
+    exec $(spack location -i slurm)/sbin/slurmd --conf-server slurmctl:6817 -Dvvv
 fi
 
 exec "$@"
