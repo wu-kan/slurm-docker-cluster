@@ -1,6 +1,6 @@
 # Slurm Docker Cluster
 
-This is a multi-container Slurm cluster using docker-compose.  The compose file
+This is a multi-container Slurm cluster using docker compose.  The compose file
 creates named volumes for persistent storage of MySQL data files as well as
 Slurm state and log directories.
 
@@ -37,19 +37,19 @@ tag:
 docker build --build-arg SLURM_TAG="slurm-19-05-2-1" -t slurm-docker-cluster:19.05.2 .
 ```
 
-Or equivalently using `docker-compose`:
+Or equivalently using `docker compose`:
 
 ```console
-SLURM_TAG=slurm-19-05-2-1 IMAGE_TAG=19.05.2 docker-compose build
+SLURM_TAG=slurm-19-05-2-1 IMAGE_TAG=19.05.2 docker compose build
 ```
 
 
 ## Starting the Cluster
 
-Run `docker-compose` to instantiate the cluster:
+Run `docker compose` to instantiate the cluster:
 
 ```console
-IMAGE_TAG=19.05.2 docker-compose up -d
+IMAGE_TAG=19.05.2 docker compose up -d
 ```
 
 ## Register the Cluster with SlurmDBD
@@ -65,7 +65,7 @@ script:
 > ready before registering the cluster.  Otherwise, you may get an error such
 > as **sacctmgr: error: Problem talking to the database: Connection refused**.
 >
-> You can check the status of the cluster by viewing the logs: `docker-compose
+> You can check the status of the cluster by viewing the logs: `docker compose
 > logs -f`
 
 ## Accessing the Cluster
@@ -101,8 +101,8 @@ slurm-2.out
 ## Stopping and Restarting the Cluster
 
 ```console
-docker-compose stop
-docker-compose start
+docker compose stop
+docker compose start
 ```
 
 ## Deleting the Cluster
@@ -110,7 +110,7 @@ docker-compose start
 To remove all containers and volumes, run:
 
 ```console
-docker-compose stop
-docker-compose rm -f
+docker compose stop
+docker compose rm -f
 docker volume rm slurm-docker-cluster_etc_munge slurm-docker-cluster_etc_slurm slurm-docker-cluster_slurm_jobdir slurm-docker-cluster_var_lib_mysql slurm-docker-cluster_var_log_slurm
 ```
