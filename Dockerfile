@@ -24,13 +24,12 @@ chmod 600 /etc/slurm/slurmdbd.conf
 chown -R slurm:slurm /var/*/slurm*
 
 . $SCC_SETUP_ENV
-spack install -y --fail-fast slurm+hdf5+hwloc+mariadb+pmix+readline+restd target=$(arch) ^ glib@:2.74.7 ^ hdf5~mpi && spack gc -y
+spack install -y --fail-fast slurm+hwloc+mariadb+pmix+readline+restd target=$(arch) ^ glib@:2.74.7 && spack gc -y
 spack clean -ab
 
 groupadd -r munge
 useradd -r -g munge munge
-spack load munge
-munge $(spack location -i munge)/sbin/mungekey -v
+dd if=/dev/urandom bs=1 count=1024 >/etc/munge/munge.key
 chown -R munge:munge /etc/munge /etc/munge/munge.key
 
 EOF
