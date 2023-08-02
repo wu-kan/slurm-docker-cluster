@@ -35,7 +35,7 @@ chown -R slurm:slurm /var/*/slurm*
 
 . $SCC_SETUP_ENV
 spack install -y --fail-fast slurm+hwloc+mariadb+pmix+readline+restd target=$(arch) && spack gc -y
-spack clean -ab
+spack clean -a
 
 EOF
 
