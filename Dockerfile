@@ -8,7 +8,7 @@ RUN <<EOF
 apt-get update -y
 apt-get upgrade -y
 apt-get install --no-install-recommends -y \
-    gosu
+    gosu ninja-build
 gosu nobody true
 apt-get autoremove -y
 apt-get clean -y
@@ -34,7 +34,7 @@ chmod 600 /etc/slurm/slurmdbd.conf
 chown -R slurm:slurm /var/*/slurm*
 
 . $SCC_SETUP_ENV
-spack install -y --fail-fast ninja slurm+hwloc+mariadb+pmix+readline+restd target=$(arch) && spack gc -y
+spack install -y --fail-fast slurm+hwloc+mariadb+pmix+readline+restd target=$(arch) && spack gc -y
 spack clean -ab
 
 EOF
