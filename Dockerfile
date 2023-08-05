@@ -34,7 +34,7 @@ chmod 600 /etc/slurm/slurmdbd.conf
 chown -R slurm:slurm /var/*/slurm*
 
 . $SCC_SETUP_ENV
-spack install -y --fail-fast slurm+hwloc+mariadb+pmix+readline+restd sysconfdir=/etc/slurm target=$(arch) ^ munge localstatedir=/var ^ glib@2.56.4 && spack gc -y
+spack install -y --fail-fast slurm+hwloc+mariadb+pmix+readline+restd sysconfdir=/etc/slurm target=$(arch) ^ munge localstatedir=/var
 spack clean -ab
 
 EOF
